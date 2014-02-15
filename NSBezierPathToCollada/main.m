@@ -15,7 +15,7 @@ NSBezierPath *bezierPathToExport()
 	/* 
 	 
 		Unit size is 1.0, so 1pt * 1pt - tiny 
-		Sample shape made with Paintcode
+		Sample shape made with PaintCode
 	 
 	 */
 
