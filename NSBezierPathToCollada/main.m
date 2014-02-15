@@ -10,14 +10,6 @@
 @import SceneKit;
 @import CoreGraphics;
 
-
-/* Private API */
-
-@protocol SCNCOLLADAExportOperation
-- (void)main;
-- (id)initWithScene:(id)arg1 attributes:(id)arg2 outputURL:(id)arg3;
-@end
-
 NSBezierPath *bezierPathToExport()
 {
 	/* 
@@ -59,12 +51,9 @@ int main(int argc, const char * argv[])
 		SCNScene *scene = [SCNScene scene];
 		[scene.rootNode addChildNode:node];
 		
-		id<SCNCOLLADAExportOperation> exporter = [[NSClassFromString(@"SCNCOLLADAExportOperation") alloc] initWithScene:scene attributes:nil outputURL:[NSURL fileURLWithPath:fpath]];
-		
-		NSOperationQueue *myQueue = [[NSOperationQueue alloc] init];
-		[myQueue addOperation:(NSOperation *)exporter];
-
-		[myQueue waitUntilAllOperationsAreFinished];
+		[scene writeToURL:[NSURL fileURLWithPath:fpath] options:nil delegate:nil progressHandler:^(float totalProgress, NSError *error, BOOL *stop) {
+			
+		}];
 	}
     return 0;
 }
